@@ -51,6 +51,11 @@ fieldset {
     button[type="reset"] {
         background-color: darksalmon;
     }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 label {
     display: block;
@@ -60,4 +65,12 @@ input {
     padding: .5rem 1rem;
     width: 100%;
 
+}
+
+.icons {
+    
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
 }
