@@ -13,14 +13,25 @@ $usuario = $_POST['usuario'];
 $usuario = htmlspecialchars($usuario, ENT_QUOTES, "UTF-8");
 $color = htmlspecialchars($_POST['color']);
 
+
+$usuario = trim($usuario);
+$color = trim($color);
+
+// Vigila si un bot intenta acceder
 if ( !empty($_POST['web'])  ) {
     $_SESSION['error'] = true;
     header('location: index.php');
     exit();
 }
 
-
+// Par impedir el acceso directo a isert.php
 if (!hash_equals($_SESSION['token'], $_POST['token'])) {
+    $_SESSION['error'] = true;
+    header('location: index.php');
+    exit();
+}
+
+if ( empty($usuario) || empty($color)) {
     $_SESSION['error'] = true;
     header('location: index.php');
     exit();

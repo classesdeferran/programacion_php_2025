@@ -62,7 +62,7 @@ $array_filas = $select_pre->fetchAll();
                 }
                 ?>
                 <div style="background-color: <?= $fila['color_en'] ?>;color:<?= $color ?>;">
-                    <p> <?= $fila['usuario'] ?> </p>
+                    <p> <?= htmlspecialchars($fila['usuario'], ENT_QUOTES, "UTF-8")   ?> </p>
                     <span class="icons">
                         <a href="index.php?id=<?= $fila['id_color'] ?>&usuario=<?= $fila['usuario'] ?>&color=<?= $fila['color_es'] ?>" title="Modificar valores">
                             <i class="fa-solid fa-pen-to-square"></i>
@@ -105,7 +105,9 @@ $array_filas = $select_pre->fetchAll();
                 <!-- Formulario para insertar los datos -->
 
                 <h2>Pon aquí tus datos</h2>
-                <form action="insert.php" method="post">
+                <!-- Linea comentada para que los datos no vayan directamente a insert.php  -->
+                <!-- <form action="insert.php" method="post"> -->
+                    <form name="formInsert">
 
                     <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                     <input type="text" name="web" style="display:none">
@@ -113,10 +115,12 @@ $array_filas = $select_pre->fetchAll();
                         <div>
                             <label for="usuario">Nombre del usuario</label>
                             <input type="text" id="usuario" name="usuario">
+                            <p id="errorUsuario"></p>
                         </div>
                         <div>
                             <label for="color">Nombre del color:</label>
                             <input type="text" id="color" name="color">
+                            <p id="errorColor"></p>
                         </div>
                         <div>
                             <button type="submit">Enviar datos</button>
@@ -128,12 +132,16 @@ $array_filas = $select_pre->fetchAll();
 
             <?php endif ?>
 
+
+
                 <?php if ($_SESSION['error']) : ?>
                     <p>Se ha producido un error</p>
                 <?php endif; ?>
 
         </section>
     </main>
+
+    <script src="js/colores.js"></script>
 </body>
 
 </html>
