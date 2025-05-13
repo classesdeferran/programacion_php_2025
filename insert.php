@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Llamar a la conexión una vez
 require_once 'connection.php';
 require_once 'traduccion_colores.php';
@@ -10,9 +10,25 @@ require_once 'traduccion_colores.php';
     // echo "</pre>";
 
 $usuario = $_POST['usuario'];
+$usuario = htmlspecialchars($usuario, ENT_QUOTES, "UTF-8");
+$color = htmlspecialchars($_POST['color']);
+
+if ( !empty($_POST['web'])  ) {
+    $_SESSION['error'] = true;
+    header('location: index.php');
+    exit();
+}
+
+
+if (!hash_equals($_SESSION['token'], $_POST['token'])) {
+    $_SESSION['error'] = true;
+    header('location: index.php');
+    exit();
+}
 
 // Para convertir el color a minúsculas
-$color_es = strtolower($_POST['color']);
+$color_es = strtolower($color);
+$color_en = $array_colores_es_en[$color_es] ?? $color_es;
 // Traducir el color a inglés
 $encontrado = false;
 foreach ($array_colores_es_en as $clave => $valor) {
@@ -31,10 +47,11 @@ $insert = "INSERT INTO colores(usuario, color_es, color_en) VALUES (?, ?, ?);";
 // 2. Preparación
 $insert_pre = $conn->prepare($insert);
 // 3. Ejecución
-$insert_pre->execute([$usuario, $color_es, $array_colores_es_en[$color_es]]);
+$insert_pre->execute([$usuario, $color_es, $color_en]);
 
 $insert_pre = null;
 $conn = null;
 
 // Volver a casa -> index.php
 header('location: index.php');
+

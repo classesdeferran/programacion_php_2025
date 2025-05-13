@@ -1,4 +1,8 @@
 <?php
+error_reporting(0);
+session_start(); // -> $_SESSION
+$_SESSION['token'] = bin2hex(random_bytes(64));
+
 
 // include 'connection.php';
 // require 'connection.php';
@@ -60,11 +64,11 @@ $array_filas = $select_pre->fetchAll();
                 <div style="background-color: <?= $fila['color_en'] ?>;color:<?= $color ?>;">
                     <p> <?= $fila['usuario'] ?> </p>
                     <span class="icons">
-                        <a href="index.php?id=<?= $fila['id_color'] ?>&usuario=<?= $fila['usuario'] ?>&color=<?= $fila['color_es'] ?>">
+                        <a href="index.php?id=<?= $fila['id_color'] ?>&usuario=<?= $fila['usuario'] ?>&color=<?= $fila['color_es'] ?>" title="Modificar valores">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
 
-                        <a href="delete.php?id=<?= $fila['id_color'] ?>">
+                        <a href="delete.php?id=<?= $fila['id_color'] ?>" title="Eliminar elemento">
                             <i class="fa-solid fa-trash-can"></i>
                         </a>
 
@@ -79,15 +83,15 @@ $array_filas = $select_pre->fetchAll();
                 <!-- Formulario para actualizar los datos -->
                 <h2>Modifica tus datos</h2>
                 <form action="update.php" method="post">
-
+                    <input type="hidden" name="id_color" value="<?= $_GET['id'] ?>">
                     <fieldset>
                         <div>
                             <label for="usuario">Nombre del usuario</label>
-                            <input type="text" id="usuario" name="usuario" value="<?= $_GET['usuario'] ?>">
+                            <input type="text" id="usuario" name="usuario" value="<?= $_GET['usuario'] ?>" maxlength="50">
                         </div>
                         <div>
                             <label for="color">Nombre del color:</label>
-                            <input type="text" id="color" name="color" value="<?= $_GET['color'] ?>">
+                            <input type="text" id="color" name="color" value="<?= $_GET['color'] ?>" maxlength="25">
                         </div>
                         <div>
                             <button type="submit">Enviar datos</button>
@@ -103,6 +107,8 @@ $array_filas = $select_pre->fetchAll();
                 <h2>Pon aquí tus datos</h2>
                 <form action="insert.php" method="post">
 
+                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                    <input type="text" name="web" style="display:none">
                     <fieldset>
                         <div>
                             <label for="usuario">Nombre del usuario</label>
@@ -122,10 +128,14 @@ $array_filas = $select_pre->fetchAll();
 
             <?php endif ?>
 
-
+                <?php if ($_SESSION['error']) : ?>
+                    <p>Se ha producido un error</p>
+                <?php endif; ?>
 
         </section>
     </main>
 </body>
 
 </html>
+<?php
+$_SESSION['error'] = false;
