@@ -1,83 +1,151 @@
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato/Lato-Regular.woff2") format("woff2"),
+    url("../fonts/Lato/Lato-Regular.woff") format("woff"),
+    url("../fonts/Lato/Lato-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Lato, Arial, Helvetica, sans-serif;
+}
+
+header {
+  background-color: #444;
+  padding: 1rem 0;
+
+  div {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+  }
 }
 
 h1 {
-    text-align: center;
-    margin: 1rem 0;
+  text-align: center;
 }
 
-main {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
+.main-crear-usuario {
+  max-width: 1000px;
+  margin: 2rem auto;
 
-section > div {
-    margin: .5rem 0;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding : .5rem 1rem;
-    display: flex;
-    justify-content: space-between;
-}
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 
+  img {
+    width: 100%;
+  }
 
-fieldset {
-    margin-top: .5rem;
-    padding : 1rem;
+  fieldset {
+    padding: 1.5rem;
 
+    label {
+      display: block;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 0.5rem 1rem;
+    }
     div {
-        margin-bottom: 1rem;
+      margin: 0.5rem 0;
     }
 
     div:last-child {
-        display: flex;
-        justify-content: space-between;
+      margin: 1rem 0;
+      text-align: center;
     }
 
     button {
-        padding: .5rem 1rem;
+      background-color: steelblue;
+      border: none;
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      margin: 1rem 0;
+    }
+  }
+}
+
+#errorUsuario,
+#errorPassword,
+#errorEmail,
+#errorColor {
+  border: none;
+  margin: 0.2rem 0 0;
+  color: red;
+  font-size: 0.75rem;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+section > div {
+  margin: 0.5rem 0;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.formColores {
+  fieldset {
+    margin-top: 0.5rem;
+    padding: 1rem;
+
+    div {
+      margin-bottom: 1rem;
+    }
+
+    div:last-child {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
     }
 
     button[type="submit"] {
-        background-color: greenyellow;
+      background-color: greenyellow;
     }
     button[type="reset"] {
-        background-color: darksalmon;
+      background-color: darksalmon;
     }
 
     a {
-        color: inherit;
-        text-decoration: none;
+      color: inherit;
+      text-decoration: none;
     }
+  }
 }
+
 label {
-    display: block;
+  display: block;
 }
 
 input {
-    padding: .5rem 1rem;
-    width: 100%;
-
+  padding: 0.5rem 1rem;
+  width: 100%;
 }
 
 .icons {
-    
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-}
-
-#errorUsuario, #errorColor {
-    border: none;
-    margin: .2rem 0 0;
-    color: red;
-    font-size: .75rem;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }

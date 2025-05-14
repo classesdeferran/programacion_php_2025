@@ -9,7 +9,7 @@ $_SESSION['token'] = bin2hex(random_bytes(64));
 // include_once 'connection.php';
 
 // Llamar a la conexión una vez
-require_once 'connection.php';
+require_once 'controlador/connection.php';
 
 $array_fondo_claro = [
     "white",
@@ -40,20 +40,17 @@ $array_filas = $select_pre->fetchAll();
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php include_once 'modulos/meta.php';?>
     <title>Colores</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <header>
-        <h1>Nuestros colores preferidos</h1>
-    </header>
+<?php include_once 'modulos/header.php';?>
     <main>
         <section>
-            <h2>Nuestros usuarios</h2>
+            <h2>Nuestros amigos</h2>
 
             <?php foreach ($array_filas as $fila) : ?>
                 <?php $color = "white";
@@ -77,12 +74,12 @@ $array_filas = $select_pre->fetchAll();
 
             <?php endforeach ?>
         </section>
-        <section>
+        <section >
 
             <?php if ($_GET) : ?>
                 <!-- Formulario para actualizar los datos -->
                 <h2>Modifica tus datos</h2>
-                <form action="update.php" method="post">
+                <form action="update.php" method="post" class="formColores">
                     <input type="hidden" name="id_color" value="<?= $_GET['id'] ?>">
                     <fieldset>
                         <div>
@@ -107,7 +104,7 @@ $array_filas = $select_pre->fetchAll();
                 <h2>Pon aquí tus datos</h2>
                 <!-- Linea comentada para que los datos no vayan directamente a insert.php  -->
                 <!-- <form action="insert.php" method="post"> -->
-                    <form name="formInsert">
+                    <form name="formInsert" class="formColores">
 
                     <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
                     <input type="text" name="web" style="display:none">
