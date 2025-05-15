@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Llamar a la conexión una vez
 require_once 'connection.php';
 
@@ -40,5 +41,7 @@ if (!password_verify($password, $UsuarioExistente['password_usuario'])) {
     die();
 }
 
-echo "Usuario identificado";
+
+$_SESSION['id_usuario'] = $UsuarioExistente['id_usuario'];
+// echo "Usuario identificado";
 

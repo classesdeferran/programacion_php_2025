@@ -1,7 +1,7 @@
 
 <form name="formNewUser">
 <fieldset>
-<h2>Introduce tus datos</h2>
+<h2>Creación de cuenta</h2>
 <div>
     <label for="nombre">Nombre:</label>
     <!-- Acuerdate de poner el required  -->

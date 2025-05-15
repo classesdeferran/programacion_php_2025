@@ -45,14 +45,9 @@ main {
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
-}
-
-
-.main-crear-usuario {
   
-
   fieldset {
     padding: 1.5rem;
 
@@ -94,13 +89,7 @@ main {
   font-size: 0.75rem;
 }
 
-main {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
+
 
 section > div {
   margin: 0.5rem 0;

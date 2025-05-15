@@ -36,10 +36,10 @@ switch ($formulario) {
     case "login":
         include_once 'formularios/form_login.php';
         break;
-            case "crear_cuenta":
+    case "crear_cuenta":
         include_once 'formularios/form_crear_usuario.php';
         break;
-                    case "reset":
+    case "reset":
         include_once 'formularios/form_reset_password.php';
         break;
 }

@@ -20,11 +20,11 @@ $array_fondo_claro = [
 ];
 
 // 1. Definir la sentencia (query)
-$select = "SELECT * FROM colores;";
+$select = "SELECT * FROM colores WHERE id_usuario = ?;";
 // 2. Preparación
 $select_pre = $conn->prepare($select);
 // 3. Ejecución
-$select_pre->execute();
+$select_pre->execute(array($_SESSION['id_usuario']));
 // 4. Obtención de los valores
 $array_filas = $select_pre->fetchAll();
 

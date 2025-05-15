@@ -44,10 +44,13 @@ $prep -> bindParam(':idioma', $_POST['idioma'], PDO::PARAM_STR);
 // 4. Ejecución
 $prep->execute();
 
-$prep = null;
-$conn = null;
+
 
 echo "Usuario creado correctamente";
-
+$_SESSION['id_usuario'] = $conn->lastInsertId();
+echo $_SESSION['id_usuario'];
 // Volver a casa -> index.php
 // header('location: index.php');
+
+$prep = null;
+$conn = null;
