@@ -12,6 +12,7 @@ formInsert.addEventListener("submit", (e) => {
   const color = formInsert["color"].value.trim().toLocaleLowerCase();
   const web = formInsert["web"].value;
   const token = formInsert["token"].value;
+  const id_usuario = formInsert['id_usuario'].value
 
   const mensajeError = "Contenido requerido";
   // Validar si usuario y/o color estan vacíos
@@ -67,6 +68,7 @@ formInsert.addEventListener("submit", (e) => {
   datos.append("color", color);
   datos.append("web", web);
   datos.append("token", token);
+  datos.append("id_usuario", id_usuario);
 
   fetch("../insert.php",{
     "method": "POST",
@@ -85,3 +87,26 @@ formInsert.addEventListener("submit", (e) => {
 
 
 });
+
+
+// CERRAR SESIÓN POR INACTIVIDAD
+const tiempoInactividad = 300000 // Se mide en milisegundos
+
+let temporizador;
+
+function redirigir() {
+  window.location.href = "../../controlador/logout.php"
+}
+
+function resetearTemporizador() {
+  clearTimeout(temporizador)
+  temporizador = setTimeout(redirigir, tiempoInactividad )
+}
+
+window.addEventListener('keydown', resetearTemporizador);
+window.addEventListener('mousemove', resetearTemporizador);
+window.addEventListener('scroll', resetearTemporizador);
+window.addEventListener('click', resetearTemporizador);
+window.addEventListener('touchstart', resetearTemporizador);
+
+resetearTemporizador()

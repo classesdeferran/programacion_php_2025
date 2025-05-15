@@ -1,7 +1,7 @@
 <?php
 
 // Llamar a la conexión una vez
-require_once 'connection.php';
+require_once 'controlador/connection.php';
 
 // 1. Definir la sentencia preparada
 $delete = "DELETE FROM colores WHERE id_color = ?;";
@@ -14,4 +14,4 @@ $delete_pre = null;
 $conn = null;
 
 // Volver a casa -> index.php
-header('location: index.php');
+header('location: colores.php');

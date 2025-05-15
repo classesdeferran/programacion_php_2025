@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Llamar a la conexión una vez
-require_once 'connection.php';
+require_once 'controlador/connection.php';
 require_once 'traduccion_colores.php';
 
 // $_POST
@@ -54,15 +54,16 @@ if (!$encontrado) {
 
 
 // 1. Definir la sentencia preparada
-$insert = "INSERT INTO colores(usuario, color_es, color_en) VALUES (?, ?, ?);";
+$insert = "INSERT INTO colores(usuario, color_es, color_en, id_usuario) VALUES (?, ?, ?, ?);";
 // 2. Preparación
 $insert_pre = $conn->prepare($insert);
 // 3. Ejecución
-$insert_pre->execute([$usuario, $color_es, $color_en]);
+$insert_pre->execute([$usuario, $color_es, $color_en, $_POST['id_usuario']]);
 
 $insert_pre = null;
 $conn = null;
 
+echo "Preferencias grabadas";
 // Volver a casa -> index.php
 header('location: index.php');
 

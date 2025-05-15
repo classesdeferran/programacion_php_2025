@@ -1,7 +1,7 @@
 <?php
 
 // Llamar a la conexión una vez
-require_once 'connection.php';
+require_once 'controlador/connection.php';
 require_once 'traduccion_colores.php';
 
 
@@ -23,5 +23,5 @@ $update_pre = null;
 $conn = null;
 
 // Volver a casa -> index.php
-header('location: index.php');
+header('location: colores.php');
 
