@@ -10,11 +10,15 @@ $_SESSION['token'] = bin2hex(random_bytes(64));
 // Llamar a la conexión una vez
 require_once 'controlador/connection.php';
 
+$idiomesJSON = "idiomas.json";
+$file = file_get_contents($idiomesJSON);
+$idiomas = json_decode($file, true);
+$idioma = $_SESSION['idioma'] ?? "CAT";
 
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?= $idiomas[$idioma]['lang'] ?>">
 
 <head>
 <?php include_once 'modulos/meta.php';?>

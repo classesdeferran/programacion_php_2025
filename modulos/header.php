@@ -1,6 +1,6 @@
     <header>
         <div>
-            <h1>Nuestros colores favoritos</h1>
+            <h1><?= $idiomas[$idioma]['title'] ?></h1>
 
             <?php if ( isset($_SESSION['usuario'])) : ?>
                 <div>
