@@ -126,7 +126,7 @@ if (password !== password2) {
   .then(data => {
     console.log(data);
     // alert(`Usuario ${nombre} creado correctamente`)
-    window.location.href = "../colores.php";
+    window.location.href = "../email.php";
   }).catch(error => {
     console.log("Error: ", error);
   })

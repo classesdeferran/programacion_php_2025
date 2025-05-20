@@ -1,4 +1,3 @@
-
 <form name="formNewUser">
 <fieldset>
 <h2>Creación de cuenta</h2>
@@ -34,7 +33,7 @@
         <option value="ENG">ENG</option>
      </select>
 </div>
-<div>
+<div class="formEnlaces">
     <a href="index.php?formulario=login">Ya tengo cuenta</a>
 </div>
 <div>

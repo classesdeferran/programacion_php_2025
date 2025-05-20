@@ -1,6 +1,8 @@
 <?php
 session_start(); // -> $_SESSION
-$_SESSION['token'] = bin2hex(random_bytes(64));
+
+// $token = $_SESSION['token'];
+// echo strlen($token);
 
 $num_random = random_int(0,4);
 $imagenes = [

@@ -19,7 +19,7 @@ header {
   background-color: #444;
   padding: 1rem 5vw;
 
-  >div {
+  > div {
     max-width: 1000px;
     margin: 0 auto;
     display: flex;
@@ -38,13 +38,12 @@ header {
         background-color: transparent;
         border: 1px solid white;
         color: white;
-        padding: .2rem;
+        padding: 0.2rem;
         cursor: pointer;
 
-
         &:hover {
-            background-color: white;
-            color: black;
+          background-color: white;
+          color: black;
         }
       }
     }
@@ -55,9 +54,7 @@ h1 {
   text-align: left;
 }
 
-
 main {
-
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem 5vw;
@@ -70,7 +67,7 @@ main {
     height: 100%;
     object-fit: cover;
   }
-  
+
   fieldset {
     padding: 1.5rem;
 
@@ -88,6 +85,12 @@ main {
 
     div:last-child {
       margin: 1rem 0;
+      text-align: center;
+    }
+
+    a{
+      display: block;
+      margin: .5rem 0;
       text-align: center;
     }
 
@@ -111,8 +114,6 @@ main {
   color: red;
   font-size: 0.75rem;
 }
-
-
 
 section > div {
   margin: 0.5rem 0;
@@ -168,5 +169,11 @@ input {
   a {
     color: inherit;
     text-decoration: none;
+  }
+}
+.formEnlaces {
+  text-align: center;
+  a {
+    display: block;
   }
 }

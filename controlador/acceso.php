@@ -7,6 +7,7 @@
 session_start();
 // Llamar a la conexión una vez
 require_once 'connection.php';
+$token = bin2hex(random_bytes(64));
 
 foreach ($_POST as $clave => $valor) {
     $_POST[$clave] = trim(htmlspecialchars($valor, ENT_QUOTES, "UTF-8"));
@@ -32,7 +33,7 @@ $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 
 // 1. Definir la sentencia preparada
-$insert = "INSERT INTO usuarios (nombre_usuario, password_usuario, email, idioma) VALUES (:nombre, :pass, :email, :idioma);";
+$insert = "INSERT INTO temporal (nombre_usuario, password_usuario, email, idioma, token_registro) VALUES (:nombre, :pass, :email, :idioma, :token);";
 // 2. Preparación
 $prep = $conn->prepare($insert);
 // 3. Parametrizar los valores
@@ -40,6 +41,7 @@ $prep -> bindParam(':nombre', $_POST['nombre'], PDO::PARAM_STR);
 $prep -> bindParam(':pass', $hash, PDO::PARAM_STR);
 $prep -> bindParam(':email', $_POST['email'], PDO::PARAM_STR);
 $prep -> bindParam(':idioma', $_POST['idioma'], PDO::PARAM_STR);
+$prep -> bindParam(':token', $token, PDO::PARAM_STR);
 
 // 4. Ejecución
 $prep->execute();
@@ -51,6 +53,11 @@ $_SESSION['id_usuario'] = $conn->lastInsertId();
 echo $_SESSION['id_usuario'];
 // Volver a casa -> index.php
 // header('location: index.php');
+
+$_SESSION['nombre_usuario'] = $_POST['nombre'];
+$_SESSION['email'] = $_POST['email'];
+$_SESSION['ruta'] = "localhost:8000/registro.php?registro=$token";
+// header('location: ../email.php');
 
 $prep = null;
 $conn = null;
