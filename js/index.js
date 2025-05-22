@@ -142,7 +142,7 @@ if (formReset != "No") {
     event.preventDefault();
 
      document.querySelector('#errorEmail').textContent = ""
-     
+
   // Obtener el valor dentro del input
     let email = formReset["email"].value.trim();
 
@@ -176,3 +176,60 @@ if (formReset != "No") {
     
   });
 }
+
+// Capturar el objeto formulario
+const formRestablecer = document.forms["formRestablecer"] || "No";
+
+if (formRestablecer != "No") {
+  formRestablecer.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    alert("Aqui")
+    document.getElementById("errorPassword").textContent = "";
+  
+    let password1 = formRestablecer["password1"].value.trim();
+    let password2 = formRestablecer["password2"].value.trim();
+
+    const mensajeError = "Contenido requerido";
+    if (password1 === "" && password2 === "") {
+      document.getElementById("errorPassword").textContent = mensajeError;
+      return;
+    }
+
+    if (password1 === "" || password2 === "") {
+      document.getElementById("errorPassword").textContent = mensajeError;
+      return;
+    }
+
+    // Si las dos contraseñas no coinciden
+    if (password1 !== password2) {
+      document.getElementById("errorPassword").textContent =
+        "Las contraseñas no coinciden";
+      return;
+    }
+
+    // Comprobación por REGEX
+
+    // Enviar datos a acceso.php
+    const datos = new URLSearchParams();
+    datos.append("password", password1);
+
+    fetch("../controlador/nueva-pass.php", {
+      method: "POST",
+      body: datos.toString(),
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+      },
+    })
+      .then((respuesta) => respuesta.text())
+      .then((data) => {
+        console.log(data);
+        // alert(`Usuario ${nombre} creado correctamente`)
+        // window.location.href = "../index.php";
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });// Acaba el fetch
+      
+  }); // acaba el AddEventlistener
+} // acaba el if
