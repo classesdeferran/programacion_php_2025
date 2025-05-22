@@ -3,10 +3,13 @@
 <fieldset>
 <h2>Introduce tus datos</h2>
 <div>
-    <label for="usuario">Introduce tu nombre o tu email:</label>
+    <label for="email">Introduce tu email:</label>
     <!-- Acuerdate de poner el required  -->
-    <input type="text" name="usuario" id="usuario" >
-    <p id="errorUsuario"></p>
+    <input type="email" name="email" id="email" >
+    <p id="errorEmail"></p>
+    <?php if(isset($_GET['error'])) : ?>
+        <p>Error : email no registrado</p>
+    <?php endif; ?>
 </div>
 <div>
     <a href="index.php?formulario=login">Ya tengo cuenta</a>
