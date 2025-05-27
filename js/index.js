@@ -167,7 +167,7 @@ if (formReset != "No") {
              }
         // alert(`Email:  ${data} creado correctamente`)
         // window.location.href = "../email.php";
-        // window.location.href = "index.php?formulario=reset&error=1";
+        window.location.href = "index.php?formulario=revisar_correo";
       })
       .catch((error) => {
         console.log("Error: ", error);
@@ -183,8 +183,6 @@ const formRestablecer = document.forms["formRestablecer"] || "No";
 if (formRestablecer != "No") {
   formRestablecer.addEventListener("submit", (event) => {
     event.preventDefault();
-
-    alert("Aqui")
     document.getElementById("errorPassword").textContent = "";
   
     let password1 = formRestablecer["password1"].value.trim();

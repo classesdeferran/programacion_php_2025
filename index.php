@@ -57,6 +57,9 @@ switch ($formulario) {
     case "reset":
         include_once 'formularios/form_reset_password.php';
         break;
+    case "revisar_correo":
+        include_once 'formularios/revisar_correo.php';
+        break;   
     case "restablecer":
         include_once 'formularios/form_restablecer.php';
         break;

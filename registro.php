@@ -51,5 +51,5 @@ $delete_pre = null;
 $conn = null;
 
 // Volver a casa -> index.php
-header('location: colores.php');
+header('location: index.php');
 

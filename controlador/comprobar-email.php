@@ -42,4 +42,4 @@ $body .= "<p>Si no has solicitado tú el enlace no hace falta que hagas nada.</p
 
 include '../email_recuperacion.php';
 
-//   header('location: index.php?formulario=login');
+// header('location: ../index.php?formulario=revisar_correo');

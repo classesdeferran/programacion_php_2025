@@ -8,11 +8,14 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader (created by composer, not included with PHPMailer)
-require 'PHPMailer/Exception.php';
-require 'PHPMailer/PHPMailer.php';
-require 'PHPMailer/SMTP.php';
+// require 'PHPMailer/Exception.php';
+// require 'PHPMailer/PHPMailer.php';
+// require 'PHPMailer/SMTP.php';
 
+require_once __DIR__ ."../vendor/autoload.php";
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 
 
@@ -30,15 +33,15 @@ try {
     //Server settings
     $mail->SMTPDebug = 0; // SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->Host       = $_ENV['HOST'];                    //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'tu_cuenta';                         //SMTP username
-    $mail->Password   = 'tu_password';                               //SMTP password
+    $mail->Username   = $_ENV['REMITENTE'];                         //SMTP username
+    $mail->Password   = $_ENV['PASSWORD'];                              //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('tu_cuenta', 'Jo mateix'); // Remitente
+    $mail->setFrom($_ENV['REMITENTE'], 'APP COLORS'); // Remitente
     $mail->addAddress($_SESSION['email'], $_SESSION['nombre_usuario']);   // Destinatario del mensaje  
     // $mail->addAddress('ellen@example.com');               //Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');

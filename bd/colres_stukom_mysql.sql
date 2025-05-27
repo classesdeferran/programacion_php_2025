@@ -58,14 +58,18 @@ CREATE TABLE `passreset` (
   `token` varchar(128) DEFAULT NULL,
   `caducidad` datetime DEFAULT NULL,
   PRIMARY KEY (`id_passreset`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `passreset`
 --
 
-
+LOCK TABLES `passreset` WRITE;
+/*!40000 ALTER TABLE `passreset` DISABLE KEYS */;
+INSERT INTO `passreset` VALUES (6,3,'abcd','c3a47cd34f03b905c7a5b74fb69f940cd276a379f2cbfb89abfbb37199750c132724c4b55867a493dd69afa8fd68b37ee67194f4b79483d198339af3351e6a61','2025-05-22 20:02:55');
+/*!40000 ALTER TABLE `passreset` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `temporal`
@@ -82,13 +86,18 @@ CREATE TABLE `temporal` (
   `email` varchar(150) DEFAULT NULL,
   `token_registro` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_temporal`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `temporal`
 --
 
+LOCK TABLES `temporal` WRITE;
+/*!40000 ALTER TABLE `temporal` DISABLE KEYS */;
+INSERT INTO `temporal` VALUES (1,'Batman','$2y$10$nft/YiyLrNXX9K0Eg45mm.MftdNE5Y88PM2DHLVskWsCmhBREvuTO','CAT','ferran.cursos.web@gmail.com','a1eb6f1661a860fe086fd110fd0d70edabf8dfffbf2af291de53b43fa3b5254674a589bb8bfebaecfda2819f4bea00e03911ace5bb6340efd668da464c719695');
+/*!40000 ALTER TABLE `temporal` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `usuarios`
@@ -106,14 +115,18 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `nombre_usuario` (`nombre_usuario`),
   UNIQUE KEY `password_usuario` (`password_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `usuarios`
 --
 
-
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Batman','$2y$10$YdQ.x5riHRqZ4iX4OFCMeun.nfSqeKOEf1vyPzjNfxfYdqW5aZOAi','ENG','batman@joker.com'),(5,'Spiderman','$2y$10$kDtypXhDKYp5o6j3j06sX.a0n5w9ICZ6Iyzizmi.tlonGBfaymppi','CAT','ferran.cursos.web@gmail.com');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Dumping events for database 'colores'
@@ -122,7 +135,7 @@ CREATE TABLE `usuarios` (
 --
 -- Dumping routines for database 'colores'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `reset_pass` */;
+/*!50003 DROP PROCEDURE IF EXISTS `actualizar_contrasena` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -132,12 +145,16 @@ CREATE TABLE `usuarios` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `reset_pass`(IN p_id_usuario INT, IN p_pass VARCHAR(255))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_contrasena`(IN p_id_usuario INT, IN p_nueva_pass VARCHAR(255))
 BEGIN
--- update passreset set pass = p_pass where id_usuario = p_id_usuario;
-UPDATE usuarios set password_usuario = p_pass where id_usuario = p_id_usuario; 
-DELETE FROM passreset where id_usuario = p_id_usuario; 
-SELECT "OK" AS resultado;
+    -- Actualizar usuario
+    UPDATE usuarios
+    SET password_usuario = p_nueva_pass
+    WHERE id_usuario = p_id_usuario;
+
+    -- Eliminar registro de reset
+    DELETE FROM passreset
+    WHERE id_usuario = p_id_usuario;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -154,4 +171,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-27 17:02:19
+-- Dump completed on 2025-05-23 18:25:02
